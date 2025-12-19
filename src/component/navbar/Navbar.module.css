@@ -1,0 +1,9 @@
+.navbar {
+  max-width: 60px;
+  background: white;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
