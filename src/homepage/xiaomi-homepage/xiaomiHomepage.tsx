@@ -132,6 +132,7 @@ export default function XiaomiHomepage() {
             fill
             className={styles.image}
             priority
+            unoptimized
             onError={(e) => {
               console.error("Image failed to load:", data.image);
               // Có thể set fallback image ở đây
@@ -151,17 +152,23 @@ export default function XiaomiHomepage() {
         {/* Buttons */}
         {data.buttons && data.buttons.length > 0 ? (
           <div className={styles.buttons}>
-            {data.buttons.map((button: HomepageButton, index: number) => (
-              <a
-                key={index}
-                href={button.link}
-                className={styles.button}
-                target={button.link.startsWith("http") ? "_blank" : "_self"}
-                rel="noopener noreferrer"
-              >
-                {button.label}
-              </a>
-            ))}
+            {data.buttons.map((button: HomepageButton, index: number) => {
+              const isOrderNow = button.label === "Mua ngay";
+
+              return (
+                <a
+                  key={index}
+                  href={button.link}
+                  className={`${styles.button} ${
+                    isOrderNow ? styles.orderNow : styles.learnMore
+                  }`}
+                  target={button.link.startsWith("http") ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
+                >
+                  {button.label}
+                </a>
+              );
+            })}
           </div>
         ) : (
           <p className={styles.noButtons}>No buttons available</p>

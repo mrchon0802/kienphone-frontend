@@ -1,0 +1,53 @@
+.colorOption {
+  margin-top: 24px;
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.subTitle {
+  font-size: 15px;
+  color: black;
+  margin-bottom: 12px;
+}
+
+.subTitle span {
+  font-weight: 600;
+  color: #000;
+}
+
+.colorList {
+  display: flex;
+  gap: 12px;
+}
+
+.colorItem {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  position: relative;
+  background-clip: content-box;
+  padding: 2px;
+  background-color: var(--color);
+}
+
+.colorItem:hover {
+  border-color: #999;
+}
+
+.active {
+  border: 2px solid rgb(17, 154, 233);
+  transform: scale(1.1);
+}
+
+/* .active::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 50%;
+  border: 2px solid rgb(17, 154, 233);
+} */
