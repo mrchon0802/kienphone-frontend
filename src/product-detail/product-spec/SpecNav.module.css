@@ -1,0 +1,27 @@
+.nav {
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.button {
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.active {
+  text-decoration: underline;
+  text-decoration-color: #0071e3; /* màu underline */
+  text-decoration-thickness: 2px; /* độ dày */
+  text-underline-offset: 4px;
+}

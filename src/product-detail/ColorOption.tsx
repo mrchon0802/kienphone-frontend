@@ -35,7 +35,8 @@ function ColorOption({
   return (
     <div className={styles.colorOption}>
       <p className={styles.title}>
-        <strong>Finish.</strong> Pick your favorite.
+        <strong className={styles.step}>Bước đầu.</strong>{" "}
+        <span className={styles.description}>Chọn màu yêu thích của bạn.</span>
       </p>
       <strong>
         <p className={styles.subTitle}>

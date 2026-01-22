@@ -1,12 +1,14 @@
-.colorOption {
+/* .colorOption {
   margin-top: 24px;
-}
+} */
 
 .title {
-  font-size: 18px;
-  margin-bottom: 8px;
+  font-size: 24px;
+  margin-bottom: 40px;
 }
-
+.description {
+  color: var(--kds-color--color);
+}
 .subTitle {
   font-size: 15px;
   color: black;

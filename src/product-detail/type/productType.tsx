@@ -1,3 +1,5 @@
+/* ================= OPTION ================= */
+
 export interface ColorOption {
   name: string;
   code: string;
@@ -9,26 +11,39 @@ export interface ProductOption {
   color: ColorOption[];
 }
 
+/* ================= VARIANT ================= */
+
 export interface VariantOption {
   variantId: string;
   color: string;
   storage: string;
-  ram: string;
   price: number;
   discountedPrice: number;
   image: string;
 }
 
+/* ================= FEATURE ================= */
+
+export interface ProductFeature {
+  title: string;
+  description: string;
+}
+
+/* ================= PRODUCT ================= */
+
 export interface ProductType {
+  /* ===== BASIC INFO ===== */
   productId: string;
   brand: string;
   series: string;
   image: string;
   title: string;
 
+  /* ===== PRICE (DEFAULT / FALLBACK) ===== */
   price: number;
   discountedPrice: number;
 
+  /* ===== SYSTEM ===== */
   osSystem: string;
   display: string;
   refreshRate: string;
@@ -38,9 +53,11 @@ export interface ProductType {
   chipset: string;
   detailChipset: string;
 
+  /* ===== SPEC TEXT (DISPLAY ONLY) ===== */
   ram: string;
   storage: string;
 
+  /* ===== CAMERA ===== */
   rearCameraResolution: string[];
   rearVideoRecording: string;
   rearCameraFlash: string;
@@ -48,11 +65,13 @@ export interface ProductType {
   frontCameraResolution: string;
   frontVideoRecording: string;
 
+  /* ===== BATTERY ===== */
   batteryCapacity: string;
   batteryType: string;
   chargingPower: string;
   batteryTechnology: string[];
 
+  /* ===== CONNECTION ===== */
   mobileNetwork: string;
   sim: string;
 
@@ -63,14 +82,19 @@ export interface ProductType {
   chargingPort: string;
   otherConnections: string[];
 
+  /* ===== DESIGN ===== */
   design: string;
   material: string;
   weight: string;
   size: string;
 
-  launchdate: string;
+  launchDate: string;
   waterResistance: string;
 
+  /* ===== FEATURE (HIGHLIGHT) ===== */
+  feature: ProductFeature[];
+
+  /* ===== OPTION & VARIANT ===== */
   option: ProductOption;
   variant: VariantOption[];
 }

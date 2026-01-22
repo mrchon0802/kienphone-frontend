@@ -3,12 +3,15 @@
 import React from "react";
 import styles from "./Price.module.css";
 import { VariantOption } from "./type/productType";
+import { Truck } from "lucide-react";
 
 interface PriceProps {
   variant?: VariantOption;
   buttonText?: string;
   showButton?: boolean;
   onButtonClick?: () => void;
+  productName: string | null;
+  variants: VariantOption[];
 }
 
 export default function Price({
@@ -16,17 +19,9 @@ export default function Price({
   buttonText = "Mua ngay",
   showButton = true,
   onButtonClick,
+  productName,
+  variants,
 }: PriceProps) {
-  if (!variant) {
-    return (
-      <div className={styles.priceContainer}>
-        <div className={styles.currentPrice}>Vui lòng chọn phiên bản</div>
-      </div>
-    );
-  }
-
-  const { price, discountedPrice } = variant;
-
   const formatPrice = (amount: number) =>
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
@@ -34,38 +29,81 @@ export default function Price({
       minimumFractionDigits: 0,
     }).format(amount);
 
-  const hasDiscount = discountedPrice < price;
+  const minVariantPrice = React.useMemo(() => {
+    if (!variants || variants.length === 0) return 0;
+
+    return Math.min(...variants.map((v) => v.discountedPrice ?? v.price));
+  }, [variants]);
+
+  const hasVariant = Boolean(variant);
+  const price = variant?.price ?? 0;
+  const discountedPrice = variant?.discountedPrice ?? 0;
+
+  const displayPrice = hasVariant
+    ? variant!.discountedPrice ?? variant!.price
+    : minVariantPrice;
+
+  const hasDiscount = hasVariant && discountedPrice < price;
   const discountPercentage = hasDiscount
     ? Math.round((1 - discountedPrice / price) * 100)
     : 0;
 
   return (
     <div className={styles.priceContainer}>
-      <div className={styles.priceContent}>
-        {/* Giá hiện tại */}
-        <div className={styles.currentPrice}>
-          {formatPrice(discountedPrice)}
-        </div>
+      {/* top */}
+      <div className={styles.priceInfo}>
+        {productName && (
+          <div className={styles.productName}>
+            <strong>{productName}</strong>
+          </div>
+        )}
 
-        {/* Giá gốc */}
-        {hasDiscount && (
-          <div className={styles.originalPriceContainer}>
-            <span className={styles.originalPrice}>{formatPrice(price)}</span>
-            {discountPercentage > 0 && (
-              <span className={styles.discountPercent}>
-                -{discountPercentage}%
-              </span>
+        {hasVariant ? (
+          <div className={styles.priceContent}>
+            <div className={styles.currentPrice}>
+              {formatPrice(discountedPrice)}
+            </div>
+
+            {hasDiscount && (
+              <div className={styles.originalPriceContainer}>
+                <span className={styles.originalPrice}>
+                  {formatPrice(price)}
+                </span>
+                <span className={styles.discountPercent}>
+                  {" "}
+                  Tiết kiệm {discountPercentage}%
+                </span>
+              </div>
             )}
+          </div>
+        ) : (
+          <div className={styles.currentPrice}>
+            Chỉ từ {formatPrice(displayPrice)}
           </div>
         )}
       </div>
 
-      {/* Nút mua */}
-      {showButton && (
-        <button className={styles.buyButton} onClick={onButtonClick}>
-          {buttonText}
-        </button>
-      )}
+      {/* bottom */}
+      <div className={styles.priceAction}>
+        <div className={styles.shipping}>
+          <Truck size={22} />
+
+          <strong>Free Shipping</strong>
+        </div>
+        <div className={styles.divider} />
+        <div>
+          {" "}
+          {showButton && (
+            <button
+              className={styles.buyButton}
+              disabled={!hasVariant}
+              onClick={onButtonClick}
+            >
+              {buttonText}
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

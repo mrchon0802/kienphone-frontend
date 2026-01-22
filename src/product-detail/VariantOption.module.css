@@ -1,12 +1,14 @@
-.variantOption {
+/* .variantOption {
   margin-top: 32px;
-}
+} */
 
 .title {
-  font-size: 18px;
-  margin-bottom: 16px;
+  font-size: 24px;
+  margin-bottom: 40px;
 }
-
+.description {
+  color: var(--kds-color--color);
+}
 .optionList {
   display: flex;
   flex-direction: column;
@@ -15,19 +17,14 @@
 
 .optionItem {
   width: 100%;
-  padding: 16px 20px;
+  padding: 20px 20px;
   border-radius: 12px;
-  border: 1.5px solid #d2d2d7;
+  border: 2px solid #d2d2d7;
   background: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: border 0.2s ease;
-}
-
-.optionItem:hover {
-  border-color: #000;
 }
 
 .active {
@@ -42,5 +39,12 @@
 .price {
   font-size: 14px;
   color: #555;
-  text-align: right;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
